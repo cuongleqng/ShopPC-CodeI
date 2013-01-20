@@ -5,6 +5,7 @@
     </div>
 </div>
 <div class="list" style="text-align:justify">
+
     <?php
         if (isset($news))
         {

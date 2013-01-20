@@ -1,0 +1,75 @@
+#user-panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 995;
+    opacity:0;
+}
+
+.errorPanel {
+    margin: 10px 0 20px;
+    color: #B40000;
+    background: #FFEBEB;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border: 1px solid #B40000;
+}
+
+.errorPanel .errors {
+    margin: .75em 2em;
+    display: block;
+    line-height: 1.5;
+}
+
+.okPanel{
+    margin: 10px 0 20px;
+    color: #496528;
+    background: #e3f9ca;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border: 1px solid #89B755;
+}
+
+.okPanel .ok {
+    margin: .75em 2em;
+    display: block;
+    line-height: 1.5;
+}
+
+
+#user-panel-content{background:#f3f3f3;width:100%;margin:0 auto;position:relative;z-index:999;padding:1px 0 0; border-bottom:7px solid #3a414b;}
+#user-panel-inner{position:relative;overflow:hidden;margin:10px 0 5px;}
+#user-panel-inner #user-panel-form{width:400px;display:block;margin:0 auto;}
+#user-panel-form .form-field{margin:6px 0; clear:both;}
+#user-panel-form .form-field label{font-weight:normal; width:140px; display: block; float:left; font-size:12px; margin-top:2px}
+#user-panel-form .form-field label.html-label{display: inline;float:none;}
+#user-panel-form .form-field input[type="text"], .form-field input[type="password"] {border: 1px solid #A8A8A8;padding: 4px 10px;}
+#user-panel-form .p-button-start{background: url('../images/btn-red.png') no-repeat; border:none; padding:0 4px 4px 8px; height:30px; float:left;color:#fff; cursor:pointer;background-position: -5px 0; margin:0;}
+#user-panel-form .p-button-end{background: url('../images/btn-red.png') no-repeat; background-position: 0 0; width:5px; height:30px; float:left; display:block}
+.user-panel-collapsed #user-panel-inner{height:0px;margin:0;padding:0;}
+#user-panel-buttons{position:absolute;bottom:-27px;right:0px;margin-right:180px;}
+#user-panel-buttons .button{display:block;height:22px;line-height:22px;padding:0 10px;margin:0 0 0 5px;text-decoration:none;cursor:pointer;outline:0;float:left;font-weight:normal;color:#fff;background:#3a414b;border:0;border-radius:0 0 6px 6px;-moz-border-radius:0 0 6px 6px;-webkit-border-radius:0 0 6px 6px;z-index:999;width:150px}
+#user-panel-buttons .button .button-inner{line-height:22px;display:block;height:22px;color:#fff;font-size:12px;text-decoration:none;}
+#user-panel-buttons .button .button-inner a{color:#fff;}
+#user-panel-buttons .button:hover,#user-panel-buttons .button:hover .button-inner{text-decoration:none;}
+#user-panel-buttons .button img{vertical-align:middle;}
+#user-panel-buttons .button .inline-link{display:inline;height:auto;padding:0;float:none;}
+#userBar{background-color: #1B1B1B; border-bottom: 1px solid #3CA9E3; font-size:12px; color:#FFF}
+#userBar .pageWidth{margin:0 auto; width: 100%;}
+#userBar .pageContent{padding:0}
+#userBar .visitorTabs{float:right; margin-right:150px}
+#userBar .navTab{padding-top:3px; padding-bottom:3px;float:left;}
+#userBar .navTab a{height:10px;line-height:10px;padding:0 20px; color:#FFF}
+
+
+
+
+
+

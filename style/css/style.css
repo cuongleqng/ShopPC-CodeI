@@ -13,7 +13,7 @@ a:hover, .selected a {text-decoration:underline;color:#3281cd;}
 .fr {float:right;}
 .mess {color:red;}
 .but{border:1px #000aaa solid;background:#3281cd;cursor:pointer;color:#fff;font:bold 12px Tahoma;}
-#bordertop{width:1000px;float:center;margin:0px auto;height:17px !important; height:15px;background:url(../images/border-top.png) bottom left no-repeat;}
+#bordertop{width:1000px;float:center;margin:10px auto 0;height:17px !important; height:15px;background:url(../images/border-top.png) bottom left no-repeat;}
 #borderbottom{width:1000px;float:center;margin:0px auto;height:20px !important; height:19px;background:url(../images/border-bottom.png) bottom left no-repeat;}
 #bgfoot{width:1000px;float:center;margin:0px auto;height:70px;background:url(../images/bg_footer.png) repeat-x bottom left;}
 #bgfoot #leftfoot{width:22px;float:left;margin:0px auto;height:70px;background:url(../images/bg_leftfooter.png) no-repeat bottom left;}

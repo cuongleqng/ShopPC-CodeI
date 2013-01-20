@@ -5,7 +5,7 @@
         function __construct(){
             
             parent::__construct();
-            $this->load->library('cart');
+            $this->load->library(array('cart','session'));
             $this->load->model('mbaogia');
         }
         
@@ -74,5 +74,52 @@
                 }
                 redirect('gio-hang');
             }
+        }
+        
+        public function insertCart()
+        {
+            $this->load->model(array('muser','mhoadon'));
+            $username = $this->security->xss_clean($this->input->post('fullname'));
+            $address = $this->security->xss_clean($this->input->post('address'));
+            $phone = $this->security->xss_clean($this->input->post('phone'));
+            $comm = $this->security->xss_clean($this->input->post('content'));
+            
+            if ($this->input->post('linhkien'))
+            {
+            
+                if (empty($username) || empty ($address) || empty($phone))
+                {
+                    echo "Bạn phải điền đầy đủ thông tin ! ";
+                }
+                elseif ($this->input->post('code') != $this->session->flashdata('security_code'))
+                {   
+                    echo "Mã bảo vệ không đúng !";
+                    
+                }
+                else
+                {
+                    if ($this->session->userdata('email') && $this->session->userdata('log_in') == TRUE )
+                    {
+                            $result = $this->muser->getInfoUser($this->session->userdata('email'));
+                            $userid = $result['user_id'];
+                            $this->mhoadon->insertHoadon('le',$comm,$userid);
+                    }
+                    else
+                    {
+                        //Chưa login thì thêm user vào database
+                        $uid = $this->muser->addUser($username,"","",$address,"",$phone);
+                        //Insert hóa đơn vào database
+                        $this->mhoadon->insertHoadon('le',$comm,$uid);
+                    }
+                    echo "success";
+                }
+            
+            }
+            else
+            {
+                
+            }
+            
+            
         }
     }

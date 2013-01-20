@@ -433,12 +433,102 @@
         </table>
         
         <div id="guidonhang" style="display: none;">
-            <table cellpadding="0" cellspacing="0" border="0">
+            <table cellpadding="0" cellspacing="10" border="0">
                 <tr>
                     <td width="200" height="22">
                     </td>
                     <td width="450" align="left">
-                        <font size="1" color="#FF8000">Hãy điền đầy đủ thông tin của bạn trước khi gửi đơn hàng cho chúng tôi</font>
+                        <font size="1" color="#FF8000">Hãy kiểm tra thông tin của bạn cẩn thận trước khi gửi đơn hàng.</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="24" align="right">
+                        Họ tên
+                    </td>
+                    <td align="left">
+                        <input tabindex="1" type="text" id="fullname" style="width:340px" 
+                            <?php
+                                if (isset($info_user))
+                                    echo "value=\"{$info_user['fullname']}\" disabled"
+                                
+                            ?>
+                        />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td height="24" align="right">
+                        Địa chỉ
+                    </td>
+                    <td align="left">
+                        <input tabindex="2" type="text" id="address" style="width: 340px;" 
+                            <?php
+                                if (isset($info_user))  
+                                    echo "value=\"{$info_user['diachi']}\" disabled"
+                            ?>
+                        
+                        />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td height="24" align="right">
+                        Điện thoại
+                    </td>
+                    <td align="left">
+                        <input tabindex="3" type="text" id="phone" style="width: 340px;" 
+                        <?php
+                            if (isset($info_user))  
+                                echo "value=\"{$info_user['phone']}\" disabled"
+                        ?>
+                        />
+                    </td>
+                    
+                </tr>
+                 <?php
+                    if (isset($info_user))
+                    {  
+                                
+                 ?>
+                
+                    <tr>
+                        <td height="24" align="right">
+                            Email
+                        </td>
+                        
+                        <td align="left">
+                            <input tabindex="4" type="text" id="email" style="width: 340px;" value="<?php echo $info_user['email']?>" disabled/>
+                        </td>
+                    </tr>
+                <?php
+                
+                    }
+                    
+                ?>
+                
+                <tr>
+                    <td height="24" align="right">
+                        Yêu cầu khác
+                    </td>
+                    <td align="left">
+                        <textarea tabindex="5" id="content" cols="40" rows="10" style="height:100px"></textarea>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td height="24" align="right">
+                        Mã xác nhận
+                    </td>
+                    <td align="left">
+                        <input tabindex="6" type="text" id="code" style="width:100px" />
+                        <img src="<?php echo base_url('captcha')?>" border="0" align="absmiddle" style="margin:0 0 0 20px" id="codeimage" />
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="left">
+                        <input tabindex="7" type="button" id="button" value="Gửi đơn hàng" onclick="guidathang()" class="button" border="0" name="guidonhang"/>
                     </td>
                 </tr>
                 

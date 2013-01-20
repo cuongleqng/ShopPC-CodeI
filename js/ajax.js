@@ -13,6 +13,73 @@ $(document).ready(function(){
             }
         })
     })
+    $('.up-login-register-button').click(function(e){
+        e.preventDefault();
+        if ($('#user-panel-inner').is(':hidden'))
+        {
+            
+            $('#user-panel-inner').slideDown("slow");
+            $('#bordertop').append('<div id="user-panel-overlay"></div>');
+            $('#user-panel-overlay').animate({opacity:0.5},"slow");
+            
+        }
+        else
+        {
+             $('#user-panel-inner').slideUp("slow");
+             $('#user-panel-overlay').remove();
+        }
+        
+    })
+    
+    $('.cm-combinations_have_account').change(function(){
+        if ($(this).attr('value') == 'N')
+        {
+            $('#on_have_account').fadeOut("normal");
+            $('#off_have_account').slideDown("normal");
+            $('#off_have_account :input').attr("disabled", false);
+        }
+        else
+        {
+            $('#off_have_account').slideUp("normal");
+            $('#on_have_account').fadeIn("normal");
+            $('#off_have_account :input').attr("disabled", true);
+        }
+    })
+    
+    $('input[name="login"]').click(function(e){
+        e.preventDefault();
+        $.post(url + "login/checkLogin",$('#user-panel-form').serialize() + '&login=1',function(data){
+           if (data=='success')
+           {
+                location.reload();
+           }    
+           else
+           {
+                if ($('.errorPanel').length)
+                    $('.errorPanel').remove();
+                $('#user-panel-form').prepend('<div class="errorPanel"><span class="errors">' + data + '</span></div>').fadeIn("fast");
+           }
+                
+        });
+    })
+    
+    $('input[name="register"]').click(function(e){
+       e.preventDefault();
+       $.post(url + "login/register", $('#user-panel-form').serialize() + '&register=1',function(data)
+       {
+            if(data == 'success')
+            {
+                location.reload();
+            }
+            else
+            {
+                if ($('.errorPanel').length)
+                    $('.errorPanel').remove();
+                $('#user-panel-form').prepend('<div class="errorPanel"><span class="errors">' + data + '</span></div>').fadeIn("fast");
+                
+            }
+       });
+    });
 })
 
 
@@ -66,38 +133,18 @@ function guidathang(){
     if ( document.dathang.fullname.value == "" ) {
 	 alert( "Hãy nhập tên của bạn vào!" );
 	 document.dathang.fullname.focus();
-    } else if ( document.dathang.email.value == "" ) {
-	 alert( "Hãy nhập email của bạn vào!" );		
-	 document.dathang.email.focus();
-    } else if (( document.dathang.email.value.search("@") == -1 ) || ( document.dathang.email.value.search("[.*]" ) == -1 )){
-	 alert( "Địa chỉ Email không hợp lệ" );	
-	 document.dathang.email.focus();
-    } else if ( document.dathang.diachi.value == "" ) {
+    }else if ( document.dathang.address.value == "" ) {
 	 alert( "Hãy nhập địa chỉ của bạn vào!" );		
-	 document.dathang.diachi.focus();
+	 document.dathang.address.focus();
     } else if ( document.dathang.phone.value == "" ) {
 	 alert( "Hãy nhập số điện thoại của bạn vào!" );		
 	 document.dathang.phone.focus();
     } else if (document.dathang.code.value == "" ){
 	 alert( "Hãy nhập mã xác nhận vào!" );	
 	 document.dathang.code.focus();
-    } else {
-    	 var fullname = encodeURIComponent(document.getElementById("fullname").value);
-	 		 var email = encodeURIComponent(document.getElementById("email").value);
-	     var phone = encodeURIComponent(document.getElementById("phone").value);
-	     var diachi = encodeURIComponent(document.getElementById("diachi").value);
-	     var content = encodeURIComponent(document.getElementById("content").value);
-	     var code = encodeURIComponent(document.getElementById("code").value);
-	     var linkid = document.getElementById("linkid").value;
-	     var param = "fullname="+fullname+"&email="+email+"&phone="+phone+"&diachi="+diachi+"&content="+content+"&code="+code;
- 	     if (linkid == ""){
- 	        window.location.href='index.php?mod=giohang&submit=1&'+param;
- 	     } else {
- 	        // Chon cau hinh  	
- 	        window.location.href='index.php?mod=choncauhinh&submit=1&'+linkid+'&'+param;
-	     }
     }
     return false;
+    
 }
 /****************  Tim kiem *****************/
 

@@ -16,6 +16,7 @@
         var url = '<?php echo base_url() ?>';
     </script>
     <link href="<?php echo base_url(); ?>style/css/style.css" rel="stylesheet" type="text/css" /> 
+    <link href="<?php echo base_url(); ?>style/css/compact.css" rel="stylesheet" type="text/css" /> 
     <link href="<?php echo base_url(); ?>style/css/carousel-skin.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>js/highslide.css" /> 
     <script type="text/javascript" lang="javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
@@ -35,8 +36,9 @@
     <script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>js/ajax.js"></script>
 </head>
 <body>
+    
     <?php
-
+        $this->load->view('login');
         $this->load->view('header');
         
     ?>

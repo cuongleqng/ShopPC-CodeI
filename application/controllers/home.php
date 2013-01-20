@@ -119,6 +119,7 @@ class Home extends CI_Controller {
             $this->data['spid'] = 0;
         $this->data['detail'] = $this->msanpham->getDetailProduct($this->data['spid']);
         $this->load->view('main',$this->data);
+     
     }
     
     
@@ -189,6 +190,8 @@ class Home extends CI_Controller {
         }
         $this->load->view('main',$this->data);
         
+        
+        
     }
     
     public function gioithieu()
@@ -257,21 +260,26 @@ class Home extends CI_Controller {
     
     public function choncauhinh(){
         $this->getMenuDefault();
-        $this->load->model('mchoncauhinh');
+        $this->load->model(array('mchoncauhinh','muser'));
         $this->data['title'] = array('text' => array('Chọn cấu hình máy tính theo ý bạn'),'link' => array(base_url()."chon-cau-hinh"));
         $this->data['main_page'] = "choncauhinh";
         $this->data['list_product'] = $this->mchoncauhinh->getList();
+        if ($this->session->userdata('email') && $this->session->userdata('log_in') == true)
+            $this->data['info_user'] = $this->muser->getInfoUser($this->session->userdata('email'));
         $this->load->view('main',$this->data);
 	
     }
     
     public function giohang(){
-        $this->load->model('mgiohang');
+        $this->load->model(array('mgiohang','muser'));
         $this->getMenuDefault();
         $this->data['title'] = array('text' => array('Giỏ hàng'), 'link' => array(base_url('gio-hang')));
         $this->data['product_cart'] = $this->mgiohang->getInfoProductCart();
         $this->data['main_page'] = "giohang";
+        if ($this->session->userdata('email') && $this->session->userdata('log_in') == true)
+            $this->data['info_user'] = $this->muser->getInfoUser($this->session->userdata('email'));
         $this->load->view('main',$this->data);
+        
     }
 
     
