@@ -84,42 +84,112 @@
             $phone = $this->security->xss_clean($this->input->post('phone'));
             $comm = $this->security->xss_clean($this->input->post('content'));
             
-            if ($this->input->post('linhkien'))
-            {
             
-                if (empty($username) || empty ($address) || empty($phone))
+            if (empty($username) || empty ($address) || empty($phone))
+            {
+                echo "Bạn phải điền đầy đủ thông tin ! ";
+            }
+            elseif ($this->input->post('code') != $this->session->flashdata('security_code'))
+            {   
+                echo "Mã bảo vệ không đúng !";   
+            }
+            else
+            {
+                if ($this->input->post('linhkien'))
                 {
-                    echo "Bạn phải điền đầy đủ thông tin ! ";
-                }
-                elseif ($this->input->post('code') != $this->session->flashdata('security_code'))
-                {   
-                    echo "Mã bảo vệ không đúng !";
-                    
-                }
-                else
-                {
+            
                     if ($this->session->userdata('email') && $this->session->userdata('log_in') == TRUE )
                     {
                             $result = $this->muser->getInfoUser($this->session->userdata('email'));
                             $userid = $result['user_id'];
-                            $this->mhoadon->insertHoadon('le',$comm,$userid);
+                            $this->mhoadon->insertHoadonLK($comm,$userid);
                     }
                     else
                     {
                         //Chưa login thì thêm user vào database
                         $uid = $this->muser->addUser($username,"","",$address,"",$phone);
                         //Insert hóa đơn vào database
-                        $this->mhoadon->insertHoadon('le',$comm,$uid);
+                        $this->mhoadon->insertHoadonLK($comm,$uid);
                     }
+                    
                     echo "success";
                 }
-            
-            }
-            else
-            {
+                elseif ($this->input->post('cauhinh'))
+                {
+                    // Nếu khách hàng chọn xây dựng cấu hình.
+                    
+                    $arr_ch = array();
+                    if ($this->input->post('cpu') && is_numeric($this->input->post('cpu')))
+                        $arr_ch[] = $this->input->post('cpu');
+                        
+                    if ($this->input->post('mainboard') && is_numeric($this->input->post('mainboard')))
+                        $arr_ch[] = $this->input->post('mainboard');
+                    
+                    if ($this->input->post('ram') && is_numeric($this->input->post('ram')))
+                        $arr_ch[] = $this->input->post('ram');
+                        
+                    if ($this->input->post('hdd') && is_numeric($this->input->post('hdd')))
+                        $arr_ch[] = $this->input->post('hdd');
+                    
+                    if ($this->input->post('vga') && is_numeric($this->input->post('vga')))
+                        $arr_ch[] = $this->input->post('vga');
+                        
+                    if ($this->input->post('monitor') && is_numeric($this->input->post('monitor')))
+                        $arr_ch[] = $this->input->post('monitor');
+                    
+                    if ($this->input->post('cse') && is_numeric($this->input->post('case')))
+                        $arr_ch[] = $this->input->post('case');
+                        
+                    if ($this->input->post('power') && is_numeric($this->input->post('power')))
+                        $arr_ch[] = $this->input->post('power');
+                        
+                    if ($this->input->post('mouse') && is_numeric($this->input->post('mouse')))
+                        $arr_ch[] = $this->input->post('mouse');
+                        
+                    if ($this->input->post('keyboard') && is_numeric($this->input->post('keyboard')))
+                        $arr_ch[] = $this->input->post('keyboard');
+                        
+                    if ($this->input->post('odd') && is_numeric($this->input->post('odd')))
+                        $arr_ch[] = $this->input->post('odd');
+                        
+                    if ($this->input->post('speaker') && is_numeric($this->input->post('speaker')))
+                        $arr_ch[] = $this->input->post('speaker');
+                    
+                    // Xử lý tổng tiền ###.###.### => #########
+                    if ($this->input->post('sum'))
+                    {
+                        $sum = str_replace(".","",$this->input->post('sum'));
+                        if (is_numeric($sum))
+                            $sum = intval($sum);
+                        else
+                            $sum = 0;
+                    }
+                        
+                    
+                    
+                    if ($this->session->userdata('email') && $this->session->userdata('log_in') == TRUE )
+                    {
+                            $result = $this->muser->getInfoUser($this->session->userdata('email'));
+                            $userid = $result['user_id'];
+                            $this->mhoadon->insertHoadonCH($arr_ch, $comm, $sum,$userid);
+                    }
+                    else
+                    {
+                        $uid = $this->muser->addUser($username,"","",$address,"",$phone);
+                        //Insert hóa đơn vào database
+                        $this->mhoadon->insertHoadonCH($arr_ch,$comm, $sum ,$uid);
+                    }
+                        
+                    echo 'success';
+                   
+                    
+                }
                 
             }
             
+            
+            
+           
             
         }
     }

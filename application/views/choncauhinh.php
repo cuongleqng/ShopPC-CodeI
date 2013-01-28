@@ -20,9 +20,42 @@
         
         $('input[name="choncauhinh"]').click(function(e){
            e.preventDefault();
-           $('form').attr("action","print");
+           $('form').attr("action",url + "print");
            $('form').submit();
         });
+        
+        $("input[name='guidonhang']").click(function(e){
+            e.preventDefault();
+            $("#loading").fadeIn("fast");
+            var param = $('form[name="choncauhinh"]').serializeArray();
+            
+            param.push({name: "fullname", value: $('#fullname').val()});
+            param.push({name: "address", value: $('#address').val()});
+            param.push({name: "phone", value: $('#phone').val()});
+            param.push({name: "content", value: $('#content').val()});
+            param.push({name: "code", value: $('#code').val()});
+            param.push({name: "sum", value: $('#sum').text()});
+            param.push({name: "cauhinh", value:1 });
+            
+            
+            $.post(url + "giohang/insertCart",param,function(data){
+                $('#codeimage').attr("src",url + "captcha");
+                $('.errorPanel, .okPanel').remove();
+                if (data == 'success')
+                {
+                    
+                     $('#guidonhang').prepend('<div class="okPanel"><span class="ok" style="text-align:center">' + "Bạn đã đặt hàng thành công. " + '</span></div>').fadeIn("fast");
+                }
+                else
+                {
+    
+                    $('#guidonhang').prepend('<div class="errorPanel"><span class="errors" style="text-align:center">' + data + '</span></div>').fadeIn("fast");
+                }
+                $('#loading').fadeOut("fast");
+            });
+        });
+        
+        
     })
 </script>
 <div class="list">
@@ -431,8 +464,10 @@
                 </td>
             </tr>
         </table>
+    </form>
         
-        <div id="guidonhang" style="display: none;">
+    <div id="guidonhang" style="display: none;">
+        <form name="dathang" id="dathang" method="POST" action="">
             <table cellpadding="0" cellspacing="10" border="0">
                 <tr>
                     <td width="200" height="22">
@@ -531,11 +566,9 @@
                         <input tabindex="7" type="button" id="button" value="Gửi đơn hàng" onclick="guidathang()" class="button" border="0" name="guidonhang"/>
                     </td>
                 </tr>
-                
-                
             </table>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 <div class="bblock">

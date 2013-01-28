@@ -5,7 +5,7 @@ class Home extends CI_Controller {
     function __construct(){
         parent:: __construct();
         
-        $this->load->model(array('mmain','mleft','msanpham'));
+        $this->load->model(array('mmain','mleft','msanpham','muser','msupport'));
         $this->load->helper(array('link_helper','source_helper'));
         $this->load->library(array('captcha_','session','cart'));
         
@@ -14,9 +14,16 @@ class Home extends CI_Controller {
         $this->load->config('config');
         $this->mmain->updateVisit();
         $this->data['visit'] = $this->mmain->getVisit();
+        
+        $this->data['support'] = $this->msupport->getSupport();
 
         //Get info flash
         $this->data['flash']= $this->mmain->getFlash();
+        if ($this->session->userdata('email') && $this->session->userdata('log_in') == true)
+            $this->data['user'] = $this->muser->getInfoUser($this->session->userdata('email'));
+        
+        
+    
         
         
     }

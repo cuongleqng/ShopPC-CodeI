@@ -77,10 +77,6 @@
                         echo 'success';
                     }
                 }
-            
-                
-                      
-               
             }
         }
         
@@ -126,6 +122,54 @@
             }
             
             return true;
+            
+        }
+        
+        public function changePass()
+        {
+            $this->load->model('muser');
+            $this->load->library('session');
+            if ($this->input->post('changePass') && $this->session->userdata('email'))
+            {
+                $email = $this->session->userdata('email');
+                $pass = $this->security->xss_clean($this->input->post('pass'));
+                $new_pass = $this->security->xss_clean($this->input->post('new_pass'));
+                $re_pass = $this->security->xss_clean($this->input->post('re_pass'));
+                
+                if (empty($pass) || empty($new_pass) || empty($re_pass))
+                    echo "Bạn phải điền đầy đủ thông tin" ;
+                elseif (!$this->muser->checkUser($email,md5($pass)))
+                    echo "Mật khẩu cũ không đúng !";
+                elseif ($new_pass != $re_pass)
+                    echo "Mật khẩu không trùng nhau ! ";
+                else
+                {
+                    if ($this->muser->changePassword($email,md5($new_pass)))
+                        echo "success";
+                    
+                }
+                
+            }
+        }
+        
+        public function changeInfo()
+        {
+            $this->load->model('muser');
+            $this->load->library('session');
+            if ($this->input->post('changeInfo') && $this->session->userdata('email'))
+            {
+                $email = $this->session->userdata('email');
+                $fullname = $this->security->xss_clean($this->input->post('fullname'));
+                $address = $this->security->xss_clean($this->input->post('address'));
+                $sex = $this->input->post('sex');
+                $phone = $this->security->xss_clean($this->input->post('phone'));
+                
+                if (empty($fullname) || empty($address) || empty($phone) )
+                    echo "Bạn phải điền đầy đủ thông tin";
+                else
+                    if ($this->muser->changeInfo($email,$fullname,$address, $sex, $phone))
+                        echo "success";
+            }
             
         }
                 

@@ -22,7 +22,9 @@
     <script type="text/javascript" lang="javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" lang="javascript" src="<?php echo base_url(); ?>js/jquery.jcarousel.js"></script>
     <script type="text/javascript" lang="javascript" src="<?php echo base_url(); ?>js/highslide-with-gallery.js"></script>
+    <script type="text/javascript" lang="javascript" src="<?php echo base_url(); ?>js/jquery.leanModal.min.js"></script>
     <script type="text/javascript">
+        
         hs.graphicsDir = url + 'js/graphics/';
         hs.align = 'center';
         hs.transitions = ['expand', 'crossfade'];
@@ -34,6 +36,8 @@
             hs.addSlideshow({ interval: 5000,repeat: false,useControls: true,fixedControls: 'fit',overlayOptions: {opacity: .75,position: 'bottom center',hideOnMouseOut: true}});
     </script>
     <script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>js/ajax.js"></script>
+    
+    
 </head>
 <body>
     

@@ -3,16 +3,16 @@
 		{
 		   $email = $this->session->userdata('email');
     ?>
-            <fieldset id="userBar">
+        <fieldset id="userBar">
             <div class="pageWidth">
                 <div class="pageContent">
                     <ul class="visitorTabs">
                        <li class="navTab account">
-                            Xin chào <b><a href="#" style="padding:0"><?php echo $email ?></a></b>
+                            Xin chào <b><a href="#infoChange" rel="leanModal" style="padding:0"><?php echo $email ?></a></b>
                        </li>
                        
                        <li class="navTab changePass">
-                            <a href="#">Đổi mật khẩu</a>
+                            <a href="#passChange"  rel="leanModal">Đổi mật khẩu</a>
                        </li> 
                        
                        <li class="navTab logout">
@@ -22,6 +22,115 @@
                 </div>
             </div>
         </fieldset>
+        <script type="text/javascript">
+        
+            $(document).ready(function(){
+               $('input[name="changePass"]').click(function(){
+                    $("#loading").fadeIn("fast");
+                    $.post(url + "login/changePass",$('#passChange form').serialize() + "&changePass=1",function(data)
+                    {
+                       $('.errorPanel, .okPanel').remove();
+                       if (data == 'success')
+                       {
+                            
+                             $('#passChange form').prepend('<div class="okPanel" style="margin:10px 10px"><span class="ok" style="text-align:center">' + "Bạn đã đổi mật khẩu thành công. " + '</span></div>').fadeIn("fast");
+                       }
+                       else
+                       {
+            
+                            $('#passChange form').prepend('<div class="errorPanel" style="margin:10px 10px"><span class="errors" style="text-align:center">' + data + '</span></div>').fadeIn("fast");
+                        } 
+                    });
+                    
+                    $('#loading').fadeOut("fast");
+               }); 
+               
+               
+               $('input[name="changeInfo"]').click(function(){
+                    $("#loading").fadeIn("fast");
+                    
+                    
+                    $.post(url + "login/changeInfo",$('#infoChange form').serialize() + "&changeInfo=1",function(data)
+                    {
+                       $('.errorPanel, .okPanel').remove();
+                       if (data == 'success')
+                       {
+                            
+                             $('#infoChange form').prepend('<div class="okPanel" style="margin:10px 10px"><span class="ok" style="text-align:center">' + "Bạn đã đổi thông tin thành công. " + '</span></div>').fadeIn("fast");
+                       }
+                       else
+                       {
+            
+                            $('#infoChange form').prepend('<div class="errorPanel" style="margin:10px 10px"><span class="errors" style="text-align:center">' + data + '</span></div>').fadeIn("fast");
+                        } 
+                    });
+                    
+                    $('#loading').fadeOut("fast");
+               }); 
+            });
+            
+        </script>
+        <div id="passChange" rel="leanModal" style="display: none">
+            <div id="pass_ct">
+                <div id="pass_header">
+                    <h2>Thay đổi mật khẩu</h2>
+                    <a class="modal_close" href="#"></a>
+                </div>
+                <form action="" method="POST" name="passChange">
+                    
+                    <div class="txt-fld">
+                        <label>Mật khẩu cũ</label>
+                        <input class="input" type="password" name="pass" />
+                    </div>
+                    <div class="txt-fld">
+                        <label>Mật khẩu mới: </label>
+                        <input class="input" type="password" name="new_pass" />
+                    </div>
+                    <div class="txt-fld">
+                        <label>Nhập lại mật khẩu: </label>
+                        <input class="input" type="password" name="re_pass"/>
+                    </div>
+                    <div class="btn-fld">
+                        <input type="button" name="changePass" value="Đổi mật khẩu"/>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
+        
+        <div id="infoChange" rel="leanModal" style="display: none">
+            <div id="info_ct">
+                <div id="info_header">
+                    <h2>Thông tin tài khoản</h2>
+                    <a class="modal_close" href="#"></a>
+                </div>
+                <form action="" method="POST" name="infoChange">
+                    
+                    <div class="txt-fld">
+                        <label>Họ và tên</label>
+                        <input class="input" type="text" name="fullname" value="<?php echo $user['fullname']?>" />
+                    </div>
+                    <div class="txt-fld">
+                        <label>Địa chỉ</label>
+                        <input class="input" type="text" name="address" value="<?php echo $user['diachi'] ?>" />
+                    </div>
+                    <div class="txt-fld">
+                        <label>Giới tính</label>
+                        <input type="radio" value="nam" name="sex" <?php if ($user['sex'] == "nam") echo "checked" ?>/> Nam
+                        <input type="radio" value="nu" name="sex" <?php if ($user['sex'] == "nu") echo "checked" ?> /> Nữ
+                    </div>
+                    
+                    <div class="txt-fld">
+                        <label>Điện thoại</label>
+                        <input class="input" type="text" name="phone" value="<?php echo $user['phone']?>"/>
+                    </div>
+                    <div class="btn-fld">
+                        <input type="button" name="changeInfo" value="Đổi thông tin"/>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
     
      <?php
        }

@@ -1,4 +1,18 @@
 $(document).ready(function(){
+   $('.changePass a').click(function(){
+        $('.errorPanel').remove();
+        $('.okPanel').remove();
+        $('#passChange').find("form")[0].reset();
+   });
+   
+    $('.account a').click(function(){
+        $('.errorPanel').remove();
+        $('.okPanel').remove();
+        
+   });
+   
+   $('a[rel*=leanModal]').leanModal({ top : 120, closeButton: ".modal_close" });
+
     $('#s_parent').bind('change',function(){
         var v = $('#s_parent option:selected').val();
         $('#loading').fadeIn("fast");

@@ -51,6 +51,16 @@
             
         }
         
+        public function changePassword($email, $pass)
+        {
+            return $this->db->update("user",array('password' => $pass), array('email' => $email));
+        }
+        
+        public function changeInfo($email,$fullname,$address, $sex, $phone)
+        {
+            return $this->db->update('user',array('fullname' => $fullname, 'diachi' => $address, 'sex' => $sex, 'phone' => $phone),array('email' => $email));
+        }
+        
         
         
     }

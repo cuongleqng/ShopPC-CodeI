@@ -138,20 +138,29 @@
             
         <div class="support fr">
         <!--Begin Support -->                 
-        
-            <div class="stitle">Bán hàng trực tuyến</div>
-            <div class="online"><img src="http://opi.yahoo.com/online?u=$bhnv1&amp;m=g&amp;t=1&amp;2=us" align="absmiddle" border="0" /> 
-            <a href="ymsgr:SendIM?$bhnv1" title="Liên hệ">NV. Kinh doanh 01</a></div>
-            <div class="online"><img src="http://opi.yahoo.com/online?u=$bhnv2&amp;m=g&amp;t=1&amp;2=us" align="absmiddle" border="0" />
-            <a href="ymsgr:SendIM?$bhnv2" title="Liên hệ">NV. Kinh doanh 02</a></div>
-            <div class="online"><img src="http://opi.yahoo.com/online?u=$bhnv3&amp;m=g&amp;t=1&amp;2=us" align="absmiddle" border="0" />
-            <a href="ymsgr:SendIM?$bhnv3" title="Liên hệ">NV. Kinh doanh 03</a></div>
-            <div class="online"><img src="http://opi.yahoo.com/online?u=$bhnv4&amp;m=g&amp;t=1&amp;2=us" align="absmiddle" border="0" />
-            <a href="ymsgr:SendIM?$bhnv4" title="Liên hệ">NV. Dịch vụ 01</a></div>
-            <div class="online"><img src="http://opi.yahoo.com/online?u=$bhnv5&amp;m=g&amp;t=1&amp;2=us" align="absmiddle" border="0" />
-            <a href="ymsgr:SendIM?$bhnv5" title="Liên hệ">NV. Dịch vụ 02</a></div>
-            <div class="shot">Số điện thoại nóng</div><div class="sdt">$bhsdt1</div>
-            <div class="phone">$bhsdt2</div>
+            <?php 
+            if (isset($support) && count($support))
+            {
+            ?>
+            
+                <div class="stitle">Bán hàng trực tuyến</div>
+                <div class="online"><img src="http://opi.yahoo.com/online?u=<?php echo $support['bhnv1'] ?>&amp;m=g&amp;t=1&amp;2=us" align="absmiddle" border="0" /> 
+                <a href="ymsgr:SendIM?<?php echo $support['bhnv1'] ?>" title="Liên hệ">NV. Kinh doanh 01</a></div>
+                <div class="online"><img src="http://opi.yahoo.com/online?u=<?php echo $support['bhnv2'] ?>&amp;m=g&amp;t=1&amp;2=us" align="absmiddle" border="0" />
+                <a href="ymsgr:SendIM?<?php echo $support['bhnv2'] ?>" title="Liên hệ">NV. Kinh doanh 02</a></div>
+                <div class="online"><img src="http://opi.yahoo.com/online?u=<?php echo $support['bhnv3'] ?>&amp;m=g&amp;t=1&amp;2=us" align="absmiddle" border="0" />
+                <a href="ymsgr:SendIM?<?php echo $support['bhnv3'] ?>" title="Liên hệ">NV. Kinh doanh 03</a></div>
+                <div class="online"><img src="http://opi.yahoo.com/online?u=<?php echo $support['bhnv4'] ?>&amp;m=g&amp;t=1&amp;2=us" align="absmiddle" border="0" />
+                <a href="ymsgr:SendIM?<?php echo $support['bhnv4'] ?>" title="Liên hệ">NV. Dịch vụ 01</a></div>
+                <div class="online"><img src="http://opi.yahoo.com/online?u=<?php echo $support['bhnv5'] ?>&amp;m=g&amp;t=1&amp;2=us" align="absmiddle" border="0" />
+                <a href="ymsgr:SendIM?<?php echo $support['bhnv5'] ?>" title="Liên hệ">NV. Dịch vụ 02</a></div>
+                <div class="shot">Số điện thoại nóng</div><div class="sdt"><?php echo $support['bhsdt1'] ?></div>
+                <div class="phone"><?php echo $support['bhsdt2'] ?></div>
+            <?php
+            
+            }
+            
+            ?>
             <!--End Support -->         
         </div>
     </div>        
