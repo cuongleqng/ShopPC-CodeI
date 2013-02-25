@@ -1,0 +1,35 @@
+	.light_a {
+			background:url("../img/overlay.png") repeat; 
+			text-align:center;
+            z-index:90;
+            position:absolute;
+            display:none;
+		}
+        .nguyen{
+            width: 500px;
+            height:90%;
+            background-color: rgba(255, 255, 255, .5);
+            
+            margin:0 auto;
+        }
+        .nguyen .border_bg{
+            background-color:white;
+            
+            height:98%;
+        
+            margin:5px;
+            position:relative;
+            top:5px;
+        }
+		.light_a p {
+			text-align:right; 
+			color:#fff; 
+			margin-right:20px; 
+			font-size:12px; 
+		}
+        .light_a label{
+        	float:left;
+        	width:170px;
+        	text-align: right;
+        	padding:0;margin: 0;
+        }
